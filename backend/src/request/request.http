@@ -1,0 +1,93 @@
+### Register
+POST http://localhost:1234/api/auth/register
+Content-Type: application/json
+
+{
+  "name": "Rodrigo",
+  "email": "roy@example.com",
+  "password": "password123"
+}
+
+### Login
+# @name login
+POST http://localhost:1234/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "rodrigo@example.com",
+  "password": "password123"
+}
+
+### Create Note
+POST http://localhost:1234/api/notes
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+  "title": "Nota sin imagen",
+  "description": "Esta es una nota sin imagen adjunta."
+}
+
+
+### Create Note with Image
+POST http://localhost:1234/api/notes
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Mi primera nota con imagen
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Esta es mi primera nota con imagen.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="imagen.jpg"
+Content-Type: image/jpeg
+
+< C:/Users/Rodrigo/Desktop/avatares/49c7c0b2ff725143f3399eb39b8a90d9.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Obtener todas las notas
+# @name getNotes
+GET http://localhost:1234/api/notes
+Authorization: Bearer {{login.response.body.token}}
+
+### Editar una nota (actualizar título y descripción)
+PUT http://localhost:1234/api/notes/68cefd71abd25e48c6253069
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: application/json
+
+{
+  "title": "Nota editada",
+  "description": "Esta nota ha sido modificada exitosamente."
+}
+
+### Editar una nota con imagen
+PUT http://localhost:1234/api/notes/68cf53a8ec4a0921929eaa51
+Authorization: Bearer {{login.response.body.token}}
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="title"
+
+Nota con imagen editada
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="description"
+
+Esta nota ha sido editada y tiene una nueva imagen.
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="image"; filename="nueva-imagen.jpg"
+Content-Type: image/jpeg
+
+< C:/Users/Rodrigo/Desktop/avatares/a28c86c785f4f634b66ab21f37c54e32.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+### Eliminar una nota
+DELETE http://localhost:1234/api/notes/68cefd71abd25e48c6253069
+Authorization: Bearer {{login.response.body.token}}
+
+### Obtener una nota específica por ID
+GET http://localhost:1234/api/notes/68cefd71abd25e48c6253069
+Authorization: Bearer {{login.response.body.token}}

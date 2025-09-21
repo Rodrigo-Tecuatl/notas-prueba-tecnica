@@ -1,0 +1,49 @@
+{
+  "expo": {
+    "name": "Notas",
+    "slug": "notas",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "icon": "./assets/icon.png",
+    "userInterfaceStyle": "light",
+    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/splash-icon.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "ios": {
+      "supportsTablet": true,
+      "infoPlist": {
+        "NSCameraUsageDescription": "Permitir que $(PRODUCT_NAME) acceda a la cámara para tomar fotos",
+        "NSMicrophoneUsageDescription": "Permitir que $(PRODUCT_NAME) acceda a su micrófono"
+      }
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./assets/adaptive-icon.png",
+        "backgroundColor": "#ffffff",
+        "permissions": [
+        "android.permission.CAMERA"
+      ]
+      },
+      "edgeToEdgeEnabled": true,
+      "predictiveBackGestureEnabled": false
+    },
+    "web": {
+      "favicon": "./assets/favicon.png"
+    },
+    "plugins": [
+      "expo-secure-store",
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Permitir que $(PRODUCT_NAME) acceda a su cámara",
+          "microphonePermission": "Permitir que $(PRODUCT_NAME) acceda a su micrófono",
+          "recordAudioAndroid": true
+        }
+      ]
+    ],
+    "jsEngine": "hermes"
+  }
+}
